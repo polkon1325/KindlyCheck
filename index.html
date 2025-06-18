@@ -125,6 +125,7 @@
     yesBtn.addEventListener('click', () => {
       main.style.display = 'none';
       message.style.display = 'block';
+	  confetti(); // 🎉
     });
 
     // No button dodging
@@ -162,5 +163,8 @@
       noBtn.style.top = `${y}px`;
     }
   </script>
+
+	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 </body>
 </html>
