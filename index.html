@@ -18,6 +18,11 @@
       align-items: center;
     }
 
+	.main {
+		display: block;
+		justify-content: center;
+	}
+
     h1 {
       font-size: 2rem;
       margin-bottom: 40px;
@@ -54,38 +59,47 @@
   </style>
 </head>
 <body>
-  <h1>Would you go on a date with me?</h1>
 
-  <button class="btn" id="yesBtn">Yes 💖</button>
-  <button class="btn" id="noBtn">No 🙅</button>
+	<div class="main" id="main">
+		<img src="asset/erm-fingers.gif" alt="date?" class="header-img" />
+		<h1>Hiii Gersey!! Would you like to go on a date with me on the 5th of July?</h1>
 
-  <div class="message" id="message">YAY! I'll message you the details 😘</div>
+		<button class="btn" id="yesBtn">Yes 💖</button>
+		<button class="btn" id="noBtn">No 🙅</button>
+	</div>
+	
+	<div class="message" id="message">
+		<img src="asset/yay-cat.gif" alt="date?" class="header-img" />
+		<h1>YAAAAAy</h1>
+	</div>
 
-  <script>
-    const noBtn = document.getElementById('noBtn');
-    const yesBtn = document.getElementById('yesBtn');
-    const message = document.getElementById('message');
+	<script>
+		const noBtn = document.getElementById('noBtn');
+		const yesBtn = document.getElementById('yesBtn');
+		const message = document.getElementById('message');
+		const main = document.getElementById('main');
 
-    yesBtn.addEventListener('click', () => {
-      message.style.display = 'block';
-      yesBtn.style.display = 'none';
-      noBtn.style.display = 'none';
-    });
+		yesBtn.addEventListener('click', () => {
+		main.style.display = 'none';
+		message.style.display = 'block';
+		yesBtn.style.display = 'none';
+		noBtn.style.display = 'none';
+		});
 
-    noBtn.addEventListener('touchstart', moveButton);
-    noBtn.addEventListener('mouseenter', moveButton);
+		noBtn.addEventListener('touchstart', moveButton);
+		noBtn.addEventListener('mouseenter', moveButton);
 
-    function moveButton() {
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
-    }
+		function moveButton() {
+		const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+		const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+		noBtn.style.left = `${x}px`;
+		noBtn.style.top = `${y}px`;
+		}
 
-    // Center the "No" button on load
-    window.onload = () => {
-      moveButton();
-    };
+		// Center the "No" button on load
+		window.onload = () => {
+		moveButton();
+		};
   </script>
 </body>
 </html>
