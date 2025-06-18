@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Go on a date with me?</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #ffe6ec;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: #e63946;
+    }
+
+    .btn {
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    #yesBtn {
+      background-color: #38b000;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #d62828;
+      color: white;
+      position: absolute;
+    }
+
+    .message {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.3rem;
+      color: #264653;
+    }
+  </style>
+</head>
+<body>
+  <h1>Would you go on a date with me? 🥺👉👈</h1>
+
+  <button class="btn" id="yesBtn">Yes 💖</button>
+  <button class="btn" id="noBtn">No 🙅</button>
+
+  <div class="message" id="message">YAY! I'll message you the details 😘</div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const message = document.getElementById('message');
+
+    yesBtn.addEventListener('click', () => {
+      message.style.display = 'block';
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+    });
+
+    noBtn.addEventListener('touchstart', moveButton);
+    noBtn.addEventListener('mouseenter', moveButton);
+
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    // Center the "No" button on load
+    window.onload = () => {
+      moveButton();
+    };
+  </script>
+</body>
+</html>
