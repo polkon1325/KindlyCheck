@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <title>Go on a date with me?</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Caveat', cursive;
       background: #ffe6ec;
       text-align: center;
       margin: 0;
@@ -18,10 +21,10 @@
       align-items: center;
     }
 
-	.main {
-		display: block;
-		justify-content: center;
-	}
+    .main {
+      display: block;
+      justify-content: center;
+    }
 
     h1 {
       font-size: 2rem;
@@ -32,7 +35,7 @@
     .btn {
       padding: 15px 25px;
       font-size: 1.2rem;
-      border: 1.5px solid rgba(255, 255, 255, 0.7); /* more visible border */
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
       border-radius: 16px;
       cursor: pointer;
       margin: 10px;
@@ -69,50 +72,95 @@
       font-size: 1.3rem;
       color: #264653;
     }
+
+    .header-img {
+      max-width: 80%;
+      height: auto;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
-	<div class="main" id="main">
-		<img src="asset/erm-fingers.gif" alt="date?" class="header-img" />
-		<h1>Hiii Gersey!! Would you like to go on a date with me on the 5th of July?</h1>
+  <div class="main" id="main">
+    <img 
+    src="asset/erm-fingers.gif" 
+    title="Click me to change the expression!" 
+    class="header-img" 
+    id="gifCycler" />
+    <h1>Hiii Gersey!! Will you be my date on the 5th of July?</h1>
 
-		<button class="btn" id="yesBtn">Yes 💖</button>
-		<button class="btn" id="noBtn">No 🙅</button>
-	</div>
-	
-	<div class="message" id="message">
-		<img src="asset/yay-cat.gif" alt="date?" class="header-img" />
-		<h1>YAAAAAy</h1>
-	</div>
+    <button class="btn" id="yesBtn">Yes 💖</button>
+    <button class="btn" id="noBtn">No 🙅</button>
+  </div>
+  
+  <div class="message" id="message">
+    <img src="asset/yay-cat.gif" alt="date?" class="header-img" />
+    <h1>YAAAAAy</h1>
+  </div>
 
-	<script>
-		const noBtn = document.getElementById('noBtn');
-		const yesBtn = document.getElementById('yesBtn');
-		const message = document.getElementById('message');
-		const main = document.getElementById('main');
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const message = document.getElementById('message');
+    const main = document.getElementById('main');
+    const gifCycler = document.getElementById('gifCycler');
 
-		yesBtn.addEventListener('click', () => {
-		main.style.display = 'none';
-		message.style.display = 'block';
-		yesBtn.style.display = 'none';
-		noBtn.style.display = 'none';
-		});
+    // GIF Cycle Setup
+    const gifSources = [
+      "asset/erm-fingers.gif",
+      "asset/begging-kitty-1.gif",
+      "asset/begging-kitty-2.gif",
+	  "asset/begging-kitty-3.gif"
+    ];
+    let currentGif = 0;
 
-		noBtn.addEventListener('touchstart', moveButton);
-		noBtn.addEventListener('mouseenter', moveButton);
+    gifCycler.addEventListener("click", () => {
+      currentGif = (currentGif + 1) % gifSources.length;
+      gifCycler.src = gifSources[currentGif];
+    });
 
-		function moveButton() {
-		const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-		const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-		noBtn.style.left = `${x}px`;
-		noBtn.style.top = `${y}px`;
-		}
+    // Yes button logic
+    yesBtn.addEventListener('click', () => {
+      main.style.display = 'none';
+      message.style.display = 'block';
+    });
 
-		// Center the "No" button on load
-		window.onload = () => {
-		moveButton();
-		};
+    // No button dodging
+    let dodgeMode = false;
+
+    noBtn.addEventListener('click', (e) => {
+      if (!dodgeMode) {
+        dodgeMode = true;
+        e.preventDefault();
+      } else {
+        e.preventDefault();
+        moveButton();
+      }
+    });
+
+    noBtn.addEventListener('touchstart', (e) => {
+      if (!dodgeMode) {
+        dodgeMode = true;
+      } else {
+        e.preventDefault();
+        moveButton();
+      }
+    });
+
+    noBtn.addEventListener('mouseenter', () => {
+      if (dodgeMode) {
+        moveButton();
+      }
+    });
+
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
   </script>
 </body>
 </html>
